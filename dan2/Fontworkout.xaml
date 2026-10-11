@@ -8,7 +8,12 @@
             Text="!!!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Label 
+            Text="sample"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
         <Button 
+           
             Text="&#xe8b8;" 
             FontFamily="MaterialIcons"
             VerticalOptions="Center" 
