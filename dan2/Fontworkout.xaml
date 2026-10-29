@@ -9,7 +9,7 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         <Label 
-            Text="sample"
+            Text="this is your font and icon workout"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         <Button 

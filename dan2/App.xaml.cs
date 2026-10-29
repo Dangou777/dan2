@@ -9,7 +9,7 @@
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new Fontworkout());
+            return new Window(new SignIn());
             // return new Window(new AppShell());
         }
     }
