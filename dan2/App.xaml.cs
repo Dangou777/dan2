@@ -1,4 +1,5 @@
-﻿namespace dan2
+﻿using dan2.Views;
+namespace dan2
 {
     public partial class App : Application
     {
@@ -9,8 +10,7 @@
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new SignIn());
-            // return new Window(new AppShell());
+            return new Window(new SignInPage());
         }
     }
 }

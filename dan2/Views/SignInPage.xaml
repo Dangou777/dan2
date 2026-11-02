@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="dan2.SignIn"
-             Title="SignIn"
-             FlowDirection="RightToLeft">
+             xmlns:views="clr-namespace:dan2.Views"
+             x:Class="dan2.Views.SignInPage"
+             x:DataType="views:SignInPage"
+             Title="SignInPage">
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
             <GradientStop Offset="0.0" Color="LightCyan"/>
@@ -15,45 +16,44 @@
 Padding="30"
 Spacing="25"
 VerticalOptions="Center">
-     
+
         <Label
 FontAttributes="Bold"
 FontSize="25"
 VerticalOptions="Center"
 Text="כניסה"
 TextColor="Snow"/>
-            <Border
+        <Border
 Padding="10"
 Stroke="#ccc"
 StrokeShape="RoundRectangle 8"
 StrokeThickness="1">
-                <Entry
+            <Entry
 x:Name="UsernameEntry"
 Keyboard="Email"
 FontSize="18"
 Placeholder="Email"
 TextColor="Wheat"
 ReturnType="Go">
-                </Entry>
+            </Entry>
 
-            </Border>
-            <Border
+        </Border>
+        <Border
 Stroke="#ccc"
 StrokeShape="RoundRectangle 8"
 StrokeThickness="1">
-                <Grid
+            <Grid
 Padding="10"
 ColumnDefinitions="*,Auto"
 VerticalOptions="Center">
-                    <Entry
-x:Name="PasswordEntry"
+                <Entry
 BackgroundColor="Transparent"
 FontSize="18"
-IsPassword="True"
+IsPassword="{Binding EntryIsPassword}"
 Placeholder="סיסמה"
 TextColor="Wheat"
 VerticalOptions="Center"/>
-                    <Button
+                <Button
 x:Name="TogglePassordButton"
 Margin="5,0,0,0"
 Padding="0"
@@ -61,14 +61,14 @@ Clicked="TogglePassordButton_Clicked"
 BackgroundColor="Transparent"
 FontSize="24"
 HorizontalOptions="End"
-Text="&#xe8f4;"
+Text="&#xe8f5;"
 FontFamily="MaterialIcons-Regular"
 TextColor="White"
 VerticalOptions="Center"/>
-                </Grid>
+            </Grid>
 
-            </Border>
-<Button
+        </Border>
+        <Button
 CornerRadius="8"
 FontSize="18"
 HeightRequest="50"
@@ -76,7 +76,7 @@ IsEnabled="False"
 Text="חיבור"
 TextColor="White"/>
 
-<Label
+        <Label
 x:Name="errorLbl"
 FontSize="45"
 HorizontalTextAlignment="Center"
@@ -84,5 +84,4 @@ IsVisible="False"
 Text="שגיאה"
 TextColor="Red"/>
     </VerticalStackLayout>
-
 </ContentPage>
