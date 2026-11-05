@@ -29,13 +29,14 @@ Stroke="#ccc"
 StrokeShape="RoundRectangle 8"
 StrokeThickness="1">
             <Entry
-x:Name="UsernameEntry"
 Keyboard="Email"
 FontSize="18"
 Placeholder="Email"
 TextColor="Wheat"
-ReturnType="Go">
-            </Entry>
+ReturnType="Go"
+Text="{Binding UserName}"/>
+
+
 
         </Border>
         <Border
@@ -49,10 +50,11 @@ VerticalOptions="Center">
                 <Entry
 BackgroundColor="Transparent"
 FontSize="18"
-IsPassword="{Binding EntryIsPassword}"
+IsPassword="{Binding EntryAsPassword}"
 Placeholder="סיסמה"
 TextColor="Wheat"
-VerticalOptions="Center"/>
+VerticalOptions="Center"
+Text="{Binding EntryAsPassword}"/>
                 <Button
 x:Name="TogglePassordButton"
 Margin="5,0,0,0"
@@ -72,9 +74,10 @@ VerticalOptions="Center"/>
 CornerRadius="8"
 FontSize="18"
 HeightRequest="50"
-IsEnabled="False"
 Text="חיבור"
-TextColor="White"/>
+TextColor="White"
+
+IsEnabled="{Binding IsSignInButtonEnabled}"/>
 
         <Label
 x:Name="errorLbl"
