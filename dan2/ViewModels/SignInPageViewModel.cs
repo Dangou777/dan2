@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using dan2.Service;
 using dan2.Helpers;
+using System.Windows.Input;
 
 namespace dan2.ViewModels
 {
@@ -31,7 +32,7 @@ namespace dan2.ViewModels
                 if (_togglePasswordButtonText != value)
                 {
                     _togglePasswordButtonText = value;
-                    OnPropertyChanged(nameof());
+                    OnPropertyChanged(nameof(TogglePasswordButtonText));
                 }
             }
         }
@@ -44,7 +45,7 @@ namespace dan2.ViewModels
                 if (_signInMessageVisible != value)
                 {
                     _signInMessageVisible = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(SignInMessageVisible));
                 }
 
             }
@@ -57,7 +58,7 @@ namespace dan2.ViewModels
                 if (value != _signInMessageColor)
                 {
                     _signInMessageColor = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(SignInMessageColor));
                 }
 
             }
@@ -70,7 +71,7 @@ namespace dan2.ViewModels
                 if (_loginMessage != value)
                 {
                     _loginMessage = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(LoginMessage));
                 }
             }
         }
@@ -95,7 +96,7 @@ namespace dan2.ViewModels
                 {
                     _userName = value;
                     OnPropertyChanged(nameof(UserName));
-                    OnPropertyChanged(nameof(IsSignInButtonEnabled));
+                    (SignInCommand as Command)?.ChangeCanExecute();
                 }
             }
 
@@ -109,48 +110,51 @@ namespace dan2.ViewModels
                 {
                     _password = value;
                     OnPropertyChanged(nameof(UserPassword));
-                    OnPropertyChanged(nameof(IsSignInButtonEnabled));
+                    (SignInCommand as Command)?.ChangeCanExecute();
                 }
             }
         }
-        public bool IsSignInButtonEnabled
+        private bool canSignIn()
         {
-
-            get => !(string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(UserPassword));
-
+            return !string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(UserPassword);
         }
         void OnSignInButtonClicked()
         {
-            if (_dbMokup.isExist(UserName, UserPassword))
+            if (_dbMokup!.IsExist(UserName, UserPassword))
             {
-                errorLbl.IsVisible = true;
-                errorLbl.Text = "התחברות הצליחה";
+                SignInMessageVisible = true;
+                SignInMessageColor = "green";
+                LoginMessage = AppMessages.loginMessage;
             }
             else
             {
-                errorLbl.IsVisible = true;
-                errorLbl.Text = "סיסמה או שם משתמש שגויים";
+                SignInMessageVisible = true;
+                SignInMessageColor = "red";
+                LoginMessage = AppMessages.loginErrorMessage;
 
             }
         }
-        void TogglePassordButton_Clicked()
-        {
-            if (EntryAsPassword)
-                TogglePasswordButtonText = FontHelper.CLOSED_EYE_ICON;
-            else
-                TogglePasswordButtonText = FontHelper.OPEN_EYE_ICON;
-            EntryAsPassword = !EntryAsPassword;
-        }
+
 
         public SignInPageViewModel()
         {
-            ShowPasswordCommand = new(TogglePassordButton_Clicked);
-           SignInCommand = new(OnSignInButtonClicked);
+            ShowPasswordCommand = new Command(() =>
+            {
+                if (EntryAsPassword)
+                    TogglePasswordButtonText = FontHelper.CLOSED_EYE_ICON;
+                else
+                    TogglePasswordButtonText = FontHelper.OPEN_EYE_ICON;
+                EntryAsPassword = !EntryAsPassword;
+            });
+
+            SignInCommand = new Command(OnSignInButtonClicked, canSignIn);
+            TogglePasswordButtonText = FontHelper.CLOSED_EYE_ICON;
             EntryAsPassword = true;
+
             _dbMokup = new DBMokup();
             if (_isDebugMode)
             {
-                UserName = "adminMail.com";
+                UserName = "admin@mail.com";
                 UserPassword = "admin";
             }
         }

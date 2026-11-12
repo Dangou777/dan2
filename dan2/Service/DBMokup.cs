@@ -17,7 +17,7 @@ namespace dan2.Service
                 _users.Add(new AppUser { UserEmail = "user1@mail.com", UserPassword = "pass1" });
                 _users.Add(new AppUser { UserEmail = "user2@mail.com", UserPassword = "pass2" });
             }
-            public bool isExist(string uEmail, string uPass)
+            public bool IsExist(string uEmail, string uPass)
             {
                 return _users.Any(u => u.UserEmail == uEmail && u.UserPassword == uPass);
             }

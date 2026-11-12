@@ -51,7 +51,7 @@
                     Placeholder="סיסמה"
                     TextColor="Wheat"
                     VerticalOptions="Center"
-                    Text="{Binding EntryAsPassword}"/>
+                    Text="{Binding UserPassword}"/>
                 <Button
                     Margin="5,0,0,0"
                     Padding="0"
@@ -71,8 +71,7 @@
             HeightRequest="50"
             Text="חיבור"
             TextColor="White"
-            Command="{Binding SignInCommand}"
-            IsEnabled="{Binding IsSignInButtonEnabled}"/>
+            Command="{Binding SignInCommand}"/>
         <Label
 FontSize="45"
 HorizontalTextAlignment="Center"
