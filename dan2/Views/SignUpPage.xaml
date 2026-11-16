@@ -2,7 +2,19 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="dan2.Views.SignUpPage"
+             xmlns:views="clr-namespace:dan2.Views"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Title="SignUpPage">
+
+    <ContentPage.Resources >
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Wheat" />
+        </Style>
+    </ContentPage.Resources>
+
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
             <GradientStop Offset="0.0" Color="#004FF9"/>
@@ -34,7 +46,7 @@
                     FontSize="18"
                     Placeholder="First Name"
                     TextColor="Wheat"
-                    Text=""/>
+                    Text="{Binding FirstName}"/>
             </Border>
             <Border
                 Margin="0,0,0,10"
@@ -46,20 +58,20 @@
                     FontSize="18"
                     Placeholder="Last Name"
                     TextColor="Wheat"
-                    Text=""/>
+                    Text="{Binding LastName}"/>
             </Border>
-            <Border
-                Margin="0,0,0,10"
-                Padding="10"
-                Stroke="#ccc"
-                StrokeShape="RoundRectangle 8"
-                StrokeThickness="1">
-                <Entry
-                    Keyboard="Email"
-                    FontSize="18"
-                    Placeholder="Email"
-                    TextColor="Wheat"
-                    Text=""/>
+            <Border Grid.Row ="2" Style="{StaticResource FormBorder}">
+                <Entry Style="{StaticResource FormEntry}"
+                       Keyboard="Email"
+                       Placeholder="Email"
+                       Text ="{Binding UserEmail}">
+                    <Entry.Behaviors>
+                        <toolkit:EmailValidationBehavior
+                                   InvalidStyle ="{StaticResource InvalidEntryStyle}"
+                                   ValidStyle ="{StaticResource ValidEntryStyle}"
+                                   Flags="ValidateOnValueChanged"/>
+                    </Entry.Behaviors>
+                </Entry>
             </Border>
             <Border
                 Margin="0,0,0,10"
@@ -71,14 +83,13 @@
                     ColumnDefinitions="*,Auto"
                     VerticalOptions="Center">
                     <Entry
-                        x:Name="PasswordEntry"
-                        IsPassword="True"
+                        IsPassword="{Binding EntryAsPassword}"
                         BackgroundColor="Transparent"
                         FontSize="18"
                         Placeholder="Password"
                         TextColor="Wheat"
                         VerticalOptions="Center"
-                        Text=""/>
+                        Text="{Binding UserPassword}"/>
                     <Button
                         Margin="5,0,0,0"
                         Padding="0"
@@ -88,7 +99,7 @@
                         TextColor="White"
                         VerticalOptions="Center"
                         FontFamily="MaterialSymbolsFont"
-                        Text="&#xe8f5;"
+                        Text="{Binding PasswordIconCode}"
                         Clicked="TogglePassordButton"/>
                 </Grid>
             </Border>
@@ -103,39 +114,7 @@
                     FontSize="18"
                     Placeholder="Mobile"
                     TextColor="Wheat"
-                    Text=""/>
-            </Border>
-
-            <Border
-                Margin="0,0,0,10"
-                Stroke="#ccc"
-                StrokeShape="RoundRectangle 8"
-                StrokeThickness="1">
-                <Grid
-                    Padding="10"
-                    ColumnDefinitions="*,Auto"
-                    VerticalOptions="Center">
-                    <Entry
-                        x:Name="PasswordEntry"
-                        IsPassword="True"
-                        BackgroundColor="Transparent"
-                        FontSize="18"
-                        Placeholder="Password"
-                        TextColor="Wheat"
-                        VerticalOptions="Center"
-                        Text=""/>
-                    <Button
-                        Margin="5,0,0,0"
-                        Padding="0"
-                        BackgroundColor="Transparent"
-                        FontSize="24"
-                        HorizontalOptions="End"
-                        TextColor="White"
-                        VerticalOptions="Center"
-                        FontFamily="MaterialSymbolsFont"
-                        Text="&#xe8f5;"
-                        Clicked="TogglePassordButton"/>
-                </Grid>
+                    Text="{Binding Mobile}"/>
             </Border>
 
             <Button
