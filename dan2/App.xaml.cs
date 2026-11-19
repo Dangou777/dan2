@@ -11,7 +11,7 @@ namespace dan2
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new SignInPage());
+            return new Window(new SignUpPage());
             //return new Window(new SignInPage2());
         }
     }

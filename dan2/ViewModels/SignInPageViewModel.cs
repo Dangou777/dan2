@@ -135,7 +135,6 @@ namespace dan2.ViewModels
             }
         }
 
-
         public SignInPageViewModel()
         {
             ShowPasswordCommand = new Command(() =>

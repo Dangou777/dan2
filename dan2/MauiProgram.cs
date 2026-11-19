@@ -11,6 +11,7 @@ namespace dan2
             var builder = MauiApp.CreateBuilder();
             builder
             .UseMauiApp<App>()
+            //Initialize the .NET MAUI Community Toolkit by adding the below line of code
             .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
